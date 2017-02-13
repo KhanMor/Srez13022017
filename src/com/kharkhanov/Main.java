@@ -5,8 +5,9 @@ import java.util.Random;
 import java.util.Set;
 
 public class Main {
-    public volatile static boolean flag = false;
-    public static Set<Integer> uniqueNumbers = new HashSet<>();
+    private volatile static boolean flag = false;
+    private static final int BOUND = 100;
+    private static Set<Integer> uniqueNumbers = new HashSet<>(100);
 
     public static void main(String[] args) {
         System.out.println("Program started.");
@@ -18,9 +19,9 @@ public class Main {
                 while (!flag) {
                     try {
                         Thread.sleep(1000);
-                        Integer newNumber = random.nextInt(99);
+                        Integer newNumber = random.nextInt(BOUND);
                         uniqueNumbers.add(newNumber);
-                        if(uniqueNumbers.size() == 100) {
+                        if(uniqueNumbers.size() == BOUND) {
                             flag = true;
                         }
                     } catch (InterruptedException e) {
